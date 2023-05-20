@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Acme&family=Concert+One&family=Pacifico&family=Righteous&family=Rubik+Moonrocks&display=swap");
-
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap');
 
 * {
   margin: 0;
@@ -14,7 +13,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Pacifico", 'Open Sans';
+  /* font-family: 'Nunito', sans-serif; */
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .wrapper {
