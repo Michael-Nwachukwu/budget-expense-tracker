@@ -275,50 +275,28 @@ keys.addEventListener("click", (event) => {
 
 // drag element
 // Make the calculator element draggable:
-dragElement(document.getElementById("mydiv"));
-function dragElement(elmnt) {
-  var pos1 = 0,
-    pos2 = 0,
-    pos3 = 0,
-    pos4 = 0;
-  if (document.getElementById(elmnt.id + "header")) {
-    // if present, the header is where you move the DIV from:
-    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-  } else {
-    // otherwise, move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
-  }
+let draggableDiv = document.getElementById('mydiv');
+let offsetX = 0;
+let offsetY = 0;
+let isDragging = false;
 
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // get the mouse cursor position at startup:
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves:
-    document.onmousemove = elementDrag;
-  }
+draggableDiv.addEventListener('mousedown', function(event) {
+  offsetX = event.clientX - draggableDiv.offsetLeft;
+  offsetY = event.clientY - draggableDiv.offsetTop;
+  isDragging = true;
+});
 
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    // calculate the new cursor position:
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
-    // set the element's new position:
-    elmnt.style.top = elmnt.offsetTop - pos2 + "px";
-    elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+document.addEventListener('mousemove', function(event) {
+  if (isDragging) {
+    draggableDiv.style.left = (event.clientX - offsetX) + 'px';
+    draggableDiv.style.top = (event.clientY - offsetY) + 'px';
   }
+});
 
-  function closeDragElement() {
-    // stop moving when mouse button is released:
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
-}
+document.addEventListener('mouseup', function() {
+  isDragging = false;
+});
+
 
 // ================================================================================================================================
 
@@ -497,9 +475,9 @@ function setExpenseDetails() {
                         </div>
                         <!-- title -->
                         <div>
-                            <span class="text-black font-bold text-xl md:text-2xl expense-name">${title}</span><br>
-                            <span  class="text-slate-600">${date}</span> <br>
-                            <span  class="text-slate-600 category">${category}</span>
+                            <span class="text-black font-light text-xl md:text-2xl expense-name">${title}</span><br>
+                            <span  class="text-slate-600 text-sm">${date}</span> <br>
+                            <span  class="text-slate-600 text-xs category">${category}</span>
                         </div>
                     </div>
 
@@ -575,75 +553,13 @@ function deleteExpense(event, value, category) {
   return false;
 }
 
-// // function to edit expense
-// function editExpense(event, value, category) {
-//   //   console.log(event);
-
-//   // resetting the budget balance amount by adding back the deleteed expense to the balance
-//   $("#balance-amount").text(
-//     parseInt($("#balance-amount").text()) + parseInt(value)
-//   );
-
-//   // value of transactions
-//   $("#expense-amount").text(
-//     parseInt($("#expense-amount").text()) - parseInt(value)
-//   );
-
-// //   removing the editing expense from dom
-// //   const element = event.path[5];
-// //   element.remove(element.selectedIndex);
-
-// //   resetting number of transactions
-//   let not = parseInt($("#not").text()) - 1;
-//   $("#not").text(not);
-
-//   //   subtracting deleted expense from the appropriate category it was added
-//   if (category == "Bills") {
-//     $("#bill-total").text(parseInt($("#bill-total").text()) - value);
-//   }
-
-//   if (category == "Education") {
-//     $("#education-total").text(parseInt($("#education-total").text()) - value);
-//   }
-
-//   if (category == "Utility") {
-//     $("#utility-total").text(parseInt($("#utility-total").text()) - value);
-//   }
-
-//   if (category == "Shopping") {
-//     $("#shopping-total").text(parseInt($("#shopping-total").text()) - value);
-//   }
-
-//   deleteExpense(event, value, category);
-
-//   // displaying the expense modal
-//   // document.querySelector("#modal").style.display = "block";
-//   $("#modal").css("display", "block");
-
-//   // setting the expense inputs fields to the values of the editing expense
-//   $("#expense-input").val(
-//     event.path[4].children[0].children[1].children[0].textContent
-//   );
-
-//   $("#amount-input").val(
-//     event.path[3].children[0].children[0].children[0].textContent
-//   );
-
-//   return false;
-// }
-
-// Open the edit modal when the edit button is clicked
 $(document).on('click', '.edit-button', function(event, expenseAmount, expenseCategory) {
-  // var parentDiv = $(this).parent('.expense');
-  // parentDiv.addClass('editing');
 
   var expenseDiv = $(this).closest('.expense');
   $(this).addClass('editing');
   var expenseName = expenseDiv.find('.expense-name').text();
   var expenseAmount = expenseDiv.find('.expense-amount').text();
   var expenseCategory = expenseDiv.find('.category').text();
-
-  // console.log(expenseCategory);
 
   // Populate the input fields in the edit modal
   $('#editexpense-input').val(expenseName);
@@ -655,6 +571,12 @@ $(document).on('click', '.edit-button', function(event, expenseAmount, expenseCa
 
   deleteExpense(event, expenseAmount, expenseCategory);
 });
+
+$('#openBtn').click(function(event) {
+  console.log('see');
+  $('#modal').show();
+});
+
 
 // Save the edited expense when the save button is clicked
 $('#saveButton').click(function(event) {
@@ -726,9 +648,10 @@ let frequentBills = document.querySelectorAll("[data-freq]");
 frequentBills.forEach((bill) => {
   bill.addEventListener("click", (event) => {
     // event.stopPropagation();
-    // console.log(event);
+    console.log("event");
 
-    document.querySelector("#modal").style.display = "block";
-    $("#expense-input").val(event.path[0].childNodes[0].textContent);
+    // document.querySelector("#modal").style.display = "block";
+    $('#modal').show();
+    // $("#expense-input").val(event.path[0].childNodes[0].textContent);
   });
 });
