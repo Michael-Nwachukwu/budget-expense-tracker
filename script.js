@@ -655,3 +655,14 @@ frequentBills.forEach((bill) => {
     // $("#expense-input").val(event.path[0].childNodes[0].textContent);
   });
 });
+
+$("#hamburgerButton").click(function() {
+  $("#sideAside").removeClass("hidden").css("transform", "translateX(0)");
+  $("#mainSection").addClass("hidden");
+});
+
+$("#exitButton").click(function() {
+  $("#sideAside").addClass("hidden").css("transform", "translateX(100%)");
+  $("#mainSection").removeClass("hidden");
+});
+
