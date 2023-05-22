@@ -436,14 +436,14 @@
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
         <div class="fixed z-10 inset-0 overflow-y-auto">
-            <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
+            <div class="flex items-center justify-center min-h-full p-6 text-center sm:p-0">
                 <div
                     class="relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
                     <form>
-                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <div class="flex flex-col mt-8 space-y-5 p-5">
+                        <div class="bg-white pb-4 sm:p-6 sm:pb-4">
+                            <div class="flex flex-col mt-4 space-y-5 p-5">
                                 <div>
-                                    <h2 class="text-left text-xl">
+                                    <h2 class="text-left text-md md:text-xl">
                                         Please Enter Your Expense
                                     </h2>
 
@@ -465,7 +465,7 @@
 
                                 </div>
                                 <div>
-                                    <h2 class="text-left text-xl">
+                                    <h2 class="text-left text-md md:text-xl">
                                         Please Enter Expense Amount
                                     </h2>
                                     <input type="text" id="amount-input"
@@ -488,7 +488,7 @@
         </div>
     </div>
 
-    <div class="modall relative z-10" id="editmodal" aria-labelledby="modal-title">
+    <!-- <div class="modall relative z-10" id="editmodal" aria-labelledby="modal-title">
 
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
@@ -535,6 +535,62 @@
                         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                             <button type="submit" id="saveButton"
                                 class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2  bg-red-700 transition duration-150 ease-out hover:ease-in hover:bg-slate-400 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                Edit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="modall relative z-10" id="editmodal" aria-labelledby="modal-title">
+
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+    
+        <div class="fixed z-10 inset-0 overflow-y-auto">
+            <div class="flex items-center justify-center min-h-full p-6 text-center sm:p-0">
+                <div
+                    class="relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+                    <form>
+                        <div class="bg-white pb-4 sm:p-6 sm:pb-4">
+                            <div class="flex flex-col mt-4 space-y-5 p-5">
+                                <div>
+                                    <h2 class="text-left text-md md:text-xl">
+                                        Please Enter Your Expense
+                                    </h2>
+    
+                                    <div class="mt-5">
+                                        <div class="mt-1 relative rounded-md shadow-sm">
+                                            <input type="text" name="title" id="editexpense-input"
+                                                class="text-stone-600 rounded-md placeholder:text-blue-900 placeholder:text-opacity-30 border-blue-900 bg-blue-900 bg-opacity-40 block w-full py-4 pl-7 pr-12 text-sm expenseInput"
+                                                placeholder="Expense title">
+                                            <div class="absolute top-0 right-0 flex items-center">
+                                                <select id="editcategories" class="h-full py-4 pl-4 pr-7 bg-transparent text-blue-900 sm:text-sm rounded-md">
+                                                    <option value="bills">Bills</option>
+                                                    <option value="education">Education</option>
+                                                    <option value="utility">Utility</option>
+                                                    <option value="shopping">Shopping</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                </div>
+                                <div>
+                                    <h2 class="text-left text-md md:text-xl">
+                                        Please Enter Expense Amount
+                                    </h2>
+                                    <input type="text" id="editamount-input"
+                                        class="expenseInput bg-blue-900 bg-opacity-40 placeholder:text-blue-900 placeholder:text-opacity-30 py-4 block w-full mt-5 pl-7 pr-12 sm:text-sm border-blue-900 rounded-md text-stone-600"
+                                        placeholder="$ 0.00">
+                                </div>
+    
+                            </div>
+                        </div>
+                        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                            <button type="submit" id="saveButton"
+                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2  bg-blue-900 transition duration-150 ease-out hover:ease-in hover:bg-slate-400 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
                                 Edit
                             </button>
                         </div>

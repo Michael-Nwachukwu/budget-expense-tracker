@@ -466,7 +466,8 @@ function setExpenseDetails() {
 
   let template = `
             <div class="expense">
-                <div class="bg-slate-50 flex flex-row justify-evenly content-center items-center md:px-9 py-7 rounded-2xl hover:shadow-xl hover:hover:bg-gray-200 md:justify-between">
+                <div class="bg-slate-50 flex flex-row justify-between content-center items-center px-4 md:px-9 py-4 sm:py-7 rounded-2xl hover:shadow-xl hover:hover:bg-gray-200">
+
                     <!-- tag and title -->
                     <div class="flex flex-row justify-around items-center">
                         <!-- icon -->
@@ -482,7 +483,7 @@ function setExpenseDetails() {
                     </div>
 
                     <!-- amount, delete and edit -->
-                    <div class="flex flex-row space-x-3 sm:space-x-6 content-center items-center">
+                    <div class="flex flex-row space-x-4 sm:space-x-6 content-center items-center">
 
                         <div class=" flex flex-row items-center text-gray-700 text-xl sm:text-2xl">
                             <span class="font-extrabold">-$</span>
@@ -494,6 +495,7 @@ function setExpenseDetails() {
                                 <i class="fa-solid fa-pen-to-square text-blue-700 px-3 py-2 md:px-5 md:py-4"></i>
                             </a>
                         </div>
+
                         <!--  -->
 
                         <div class="bg-gray-200 rounded-xl ml-4">
