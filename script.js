@@ -497,7 +497,7 @@ function setExpenseDetails() {
                         <!--  -->
 
                         <div class="bg-gray-200 rounded-xl ml-4">
-                            <a class="modif-button" onclick="deleteExpense(event, ${value}, '${category}' )" href="#" data-delete-btn>
+                            <a class="modif-button" href="#" data-delete-btn>
                                 <i class="fa-solid fa-trash-can text-red-700 px-3 py-2 md:px-5 md:py-4"></i>
                             </a>
                         </div>
@@ -513,20 +513,35 @@ function setExpenseDetails() {
 // onclick="editExpense(event, ${value}, '${category}')"
 
 // Removing expense from DOM
-$(document).on('click', '.modif-button', function() {
-  $(this).closest('.expense').remove();
-});
+// $(document).on('click', '.modif-button', function() {
+//   $(this).closest('.expense').remove();
+// });
+
+function deleteExpenseButtonClick(event) {
+  var expenseElement = $(this).closest('.expense');
+  expenseElement.remove();
+  deleteExpense(event, expenseElement);
+}
+
+$(document).on('click', '.modif-button', deleteExpenseButtonClick);
+
 
 // function to delete expense
-function deleteExpense(event, value, category) {
+function deleteExpense(event, expenseElement) {
+
+  var expenseAmount = expenseElement.find('.expense-amount').text();
+  var expenseCategory = expenseElement.find('.category').text();
+
+  console.log(expenseAmount);
+
   // resetting the budget balance amount by adding back the deleteed expense to the balance
   $("#balance-amount").text(
-    parseInt($("#balance-amount").text()) + parseInt(value)
+    parseInt($("#balance-amount").text()) + parseInt(expenseAmount)
   );
 
   // resetting the budget balance amount by adding back the deleteed expense to the balance
   $("#expense-amount").text(
-    parseInt($("#expense-amount").text()) - parseInt(value)
+    parseInt($("#expense-amount").text()) - parseInt(expenseAmount)
   );
 
   //   subtracting number of transactions with each deleted expense
@@ -534,20 +549,20 @@ function deleteExpense(event, value, category) {
   $("#not").text(not);
 
   //   subtracting deleted expense from the appropriate category it was added
-  if (category == "Bills") {
-    $("#bill-total").text(parseInt($("#bill-total").text()) - value);
+  if (expenseCategory == "Bills") {
+    $("#bill-total").text(parseInt($("#bill-total").text()) - expenseAmount);
   }
 
-  if (category == "Education") {
-    $("#education-total").text(parseInt($("#education-total").text()) - value);
+  if (expenseCategory == "Education") {
+    $("#education-total").text(parseInt($("#education-total").text()) - expenseAmount);
   }
 
-  if (category == "Utility") {
-    $("#utility-total").text(parseInt($("#utility-total").text()) - value);
+  if (expenseCategory == "Utility") {
+    $("#utility-total").text(parseInt($("#utility-total").text()) - expenseAmount);
   }
 
-  if (category == "Shopping") {
-    $("#shopping-total").text(parseInt($("#shopping-total").text()) - value);
+  if (expenseCategory == "Shopping") {
+    $("#shopping-total").text(parseInt($("#shopping-total").text()) - expenseAmount);
   }
 
   return false;
@@ -569,14 +584,13 @@ $(document).on('click', '.edit-button', function(event, expenseAmount, expenseCa
   // Show the edit modal
   $('.modall').show();
 
-  deleteExpense(event, expenseAmount, expenseCategory);
+  deleteExpense(event, expenseDiv);
 });
 
 $('#openBtn').click(function(event) {
   console.log('see');
   $('#modal').show();
 });
-
 
 // Save the edited expense when the save button is clicked
 $('#saveButton').click(function(event) {
@@ -647,12 +661,13 @@ $('#saveButton').click(function(event) {
 let frequentBills = document.querySelectorAll("[data-freq]");
 frequentBills.forEach((bill) => {
   bill.addEventListener("click", (event) => {
-    // event.stopPropagation();
-    console.log("event");
-
-    // document.querySelector("#modal").style.display = "block";
+    
     $('#modal').show();
-    // $("#expense-input").val(event.path[0].childNodes[0].textContent);
+    
+    let expenseName = event.target.childNodes[0].data;
+
+    $("#expense-input").val(expenseName);
+    
   });
 });
 
