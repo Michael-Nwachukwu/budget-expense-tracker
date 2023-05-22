@@ -1318,9 +1318,9 @@ body {
   cursor: pointer;
   display: inline-block;
   zoom: 1;
-  background: #00a2b7;
+  background: #1e3a8a;
   color: #fff;
-  border: 1px solid #0aa2b5;
+  border: 1px solid #1e3a8a;
   border-radius: 4px;
   padding: 5px 10px;
 }
@@ -1413,6 +1413,7 @@ body {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  right: 30px;
 }
 
 /* Links inside the dropdown */
@@ -1458,23 +1459,8 @@ body {
 }
 
 .expenseInput{
-  /* From https://css.glass */
-  /* background: #fee2e2; */
-  /* border-radius: 16px; */
-  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
   backdrop-filter: blur(7.5px);
   -webkit-backdrop-filter: blur(7.5px);
-  /* border: 1px solid #b91c1c; */
-}
-
-.bills {
-  /* From https://css.glass */
-  background: rgba(202, 138, 4, 0.38);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(9.7px);
-  -webkit-backdrop-filter: blur(9.7px);
-  border: 1px solid rgba(202, 138, 4, 0.08);
 }
 
 #modal{
